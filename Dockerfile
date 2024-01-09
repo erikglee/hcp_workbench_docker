@@ -20,6 +20,10 @@ RUN apt-get update && \
                     xvfb \
                     default-jre \
                     zlib1g \
+                    libglu1-mesa \
+                    libxi-dev \
+                    libxmu-dev \
+                    libglu1-mesa-dev \
                     pip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
