@@ -34,18 +34,23 @@ RUN wget https://s3.msi.umn.edu/leex6144-public/workbench-linux64-v1.5.0.zip -O 
 
 ENV PATH="${PATH}:/wb_code/workbench/bin_linux64"
 
-# Install a specific Python version (e.g., Python 3.12)
+# Install dependencies required for adding a PPA and compiling Python packages
 RUN apt-get update && apt-get install -y \
-    python3.12 \
+    software-properties-common \
+    build-essential \
+    wget \
     python3.12-venv \
-    python3.12-dev \
-    python3-pip
+    python3.12-dev
 
-# Update pip
-RUN python3.12 -m pip install --upgrade pip
+# Create a virtual environment
+# Replace `/usr/src/app/venv` with your preferred location for the virtual environment
+RUN python3.12 -m venv /usr/src/app/venv
 
-# Set python3.12 as the default python
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1
+# Activate the virtual environment
+ENV PATH="/usr/src/app/venv/bin:$PATH"
+
+# Now using the virtual environment, upgrade pip
+RUN pip install --upgrade pip
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -57,6 +62,3 @@ RUN python -m pip install matplotlib=3.8.3
 RUN python -m pip install pandas=2.1.4
 RUN python -m pip install scipy=1.11.4
 RUN python -m pip install scikit-learn=1.3.2
-
-# Make port 80 available to the world outside this container
-EXPOSE 80
