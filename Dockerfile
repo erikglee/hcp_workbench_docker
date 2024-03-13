@@ -51,7 +51,7 @@ RUN python3.12 -m venv /usr/src/app/venv
 ENV PATH="/usr/src/app/venv/bin:$PATH"
 
 # Now using the virtual environment, upgrade pip
-RUN pip install --upgrade pip
+RUN python3.12 -m pip install --upgrade pip setuptools
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
