@@ -34,24 +34,17 @@ RUN wget https://s3.msi.umn.edu/leex6144-public/workbench-linux64-v1.5.0.zip -O 
 
 ENV PATH="${PATH}:/wb_code/workbench/bin_linux64"
 
-# Install dependencies required for adding a PPA and compiling Python packages
-RUN apt-get update && apt-get install -y \
-    python3.12 \
-    python3-pip \
-    python3.12-venv \
-    python3.12-dev \
-    python3-distutils \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+# Install Python and necessary packages
+RUN apt-get update && apt-get install -y python3.12 python3.12-venv python3.12-dev python3-distutils build-essential libatlas-base-dev gfortran
 
 # Create a virtual environment
-# Replace `/usr/src/app/venv` with your preferred location for the virtual environment
 RUN python3.12 -m venv /usr/src/app/venv
 
 # Activate the virtual environment
 ENV PATH="/usr/src/app/venv/bin:$PATH"
 
-# Now using the virtual environment, upgrade pip
-RUN python3.12 -m pip install --upgrade pip setuptools
+# Upgrade pip, setuptools, and wheel
+RUN pip install --upgrade pip setuptools wheel
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
