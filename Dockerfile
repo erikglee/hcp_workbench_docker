@@ -51,7 +51,7 @@ WORKDIR /usr/src/app
 
 # Install any needed packages specified in requirements.txt
 RUN python -m pip install nibabel==5.2.1
-RUN python -m pip install numpy==1.24.3
+#RUN python -m pip install numpy==1.24.3
 RUN python -m pip install matplotlib==3.8.3
 RUN python -m pip install pandas==2.1.4
 RUN python -m pip install scipy==1.11.4
