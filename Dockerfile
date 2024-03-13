@@ -36,12 +36,12 @@ ENV PATH="${PATH}:/wb_code/workbench/bin_linux64"
 
 # Install dependencies required for adding a PPA and compiling Python packages
 RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    build-essential \
-    wget \
+    python3.12 \
+    python3-pip \
     python3.12-venv \
     python3.12-dev \
-    python3-distutils
+    python3-distutils \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
 # Create a virtual environment
 # Replace `/usr/src/app/venv` with your preferred location for the virtual environment
