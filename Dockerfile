@@ -40,7 +40,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     wget \
     python3.12-venv \
-    python3.12-dev
+    python3.12-dev \
+    python3-distutils
 
 # Create a virtual environment
 # Replace `/usr/src/app/venv` with your preferred location for the virtual environment
